@@ -1,5 +1,5 @@
-import { CheckStockFacadeInputDto, CheckStockFacadeOutputDto } from "../../facade/dto/check-stock-product-adm.dto";
 import ProductGateway from "../../gateway/product.gateway";
+import { CheckStockInputDto, CheckStockOutputDto } from "./check-stock.dto";
 
 export default class CheckStockUseCase {
 
@@ -9,7 +9,7 @@ export default class CheckStockUseCase {
         this._productRepository = productRepository;
     }
 
-    async execute(input: CheckStockFacadeInputDto): Promise<CheckStockFacadeOutputDto> {
+    async execute(input: CheckStockInputDto): Promise<CheckStockOutputDto> {
         const product = await this._productRepository.find(input.productId);
 
         return {

@@ -4,6 +4,8 @@ import ProductRepository from "../repository/product.repository";
 import AddProductUseCase from "../usecase/add-product/add-product.usecase";
 import ProductAdmFacade from "./product-adm.facade";
 import ProductAdmFacadeFactory from "../factory/facade.factory";
+import Id from "../../@shared/domain/value-object/id.value-object";
+import Product from "../domain/product.entity";
 
 describe ("ProductAdmFacade test", () => {
     let sequelize: Sequelize
