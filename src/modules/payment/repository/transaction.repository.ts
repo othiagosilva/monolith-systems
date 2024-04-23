@@ -1,6 +1,6 @@
 import Id from "../../@shared/domain/value-object/id.value-object";
-import Transaction from "../domain/transaction";
-import transaction from "../domain/transaction";
+import Transaction from "../domain/transaction-entity";
+import transaction from "../domain/transaction-entity";
 import PaymentGateway from "../gateway/payment.gateway";
 import TransactionModel from "./transaction.model";
 
