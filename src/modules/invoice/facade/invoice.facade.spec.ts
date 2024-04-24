@@ -23,6 +23,7 @@ describe("Invoice Facade test", () => {
 
     it("should generate a invoice", async ()=> {
         const facade = InvoiceFacadeFactory.create();
+
         const input = {
             id: "1",
             name: "Client 1",
@@ -43,13 +44,14 @@ describe("Invoice Facade test", () => {
                     id: "2",
                     name: "Item 2",
                     price: 200
-                }
+                },
             ],
         }
 
         await facade.generate(input);
 
-        const result = await InvoiceModel.findOne({ where: { id: "1" }, include: ["items"] });
+        const result = await InvoiceModel.findOne({ where: { id: input.id }, include: ["items"] });
+        console.log(result)
 
         expect(result).toBeDefined();
         expect(result).not.toBeNull();

@@ -4,13 +4,13 @@ import GenerateInvoiceUsecase from "../usecase/generate-invoice/generate-invoice
 import InvoiceFacadeInterface, { FindInvoiceFacadeInputDto, FindInvoiceFacadeOutputDto, GenerateInvoiceFacadeInputDto, GenerateInvoiceFacadeOutputDto } from "./invoice.facade.interface";
 
 export interface UseCaseProps {
-    findUseCase: UseCaseInterface;
-    generateUseCase: UseCaseInterface;
+    findUseCase: FindInvoiceUsecase;
+    generateUseCase: GenerateInvoiceUsecase;
 }
 
 export default class InvoiceFacade implements InvoiceFacadeInterface {
-    private findUsecase: UseCaseInterface;
-    private generateUsecase: UseCaseInterface;
+    private findUsecase: FindInvoiceUsecase;
+    private generateUsecase: GenerateInvoiceUsecase;
     constructor(props: UseCaseProps) {
         this.findUsecase = props.findUseCase;
         this.generateUsecase = props.generateUseCase;

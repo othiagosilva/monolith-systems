@@ -52,7 +52,6 @@ export interface GenerateInvoiceFacadeOutputDto {
         name: string;
         price: number;
     }[];
-    total: number;
 }
 
 export default interface InvoiceFacadeInterface {

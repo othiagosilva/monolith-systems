@@ -13,6 +13,7 @@ export default class GenerateInvoiceUsecase implements UseCaseInterface {
     async execute(input: GenerateInvoiceUseCaseInputDto): Promise<GenerateInvoiceUseCaseOutputDto> {
 
         const invoice = new Invoice({
+            id: new Id(input.id) || new Id(),
             name: input.name,
             document: input.document,
             address: new Address({
@@ -31,6 +32,8 @@ export default class GenerateInvoiceUsecase implements UseCaseInterface {
                 });
             })
         });
+
+        console.log(invoice)
 
         await this.invoiceRepository.generate(invoice);
 
