@@ -22,7 +22,7 @@ describe("API /checkout e2e tests", () => {
 
   let migration: Umzug<any>;
 
-  beforeEach(async () => {
+  beforeAll(async () => {
     sequelize = new Sequelize({
       dialect: "sqlite",
       storage: ":memory:",
@@ -43,7 +43,7 @@ describe("API /checkout e2e tests", () => {
     await migration.up();
   });
 
-  afterEach(async () => {
+  afterAll(async () => {
     if (!migration || !sequelize) {
       return;
     }
