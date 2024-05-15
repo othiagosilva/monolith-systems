@@ -1,10 +1,8 @@
 import request from "supertest";
-import { Umzug } from "umzug";
-import { migrator } from "../../test-migrations/config/migrator";
 import express, { Express } from "express";
 import { Sequelize } from "sequelize-typescript";
 import { productsRoute } from "../routes/productsRoute";
-import { ProductAdmModel } from "../../modules/product-adm/repository/product.model";
+import { ProductModel } from "../../modules/product-adm/repository/product.model";
 
 describe("API /products e2e tests", () => {
   const app: Express = express();
@@ -22,7 +20,7 @@ describe("API /products e2e tests", () => {
       sync: { force: true },
     });
 
-    sequelize.addModels([ProductAdmModel]);
+    sequelize.addModels([ProductModel]);
     await sequelize.sync()
   });
 

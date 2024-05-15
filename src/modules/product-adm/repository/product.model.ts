@@ -5,7 +5,7 @@ import { Column, Model, PrimaryKey, Table } from "sequelize-typescript";
     timestamps: false
 })
 
-export class ProductAdmModel extends Model {
+export class ProductModel extends Model {
     @PrimaryKey
     @Column({allowNull : false})
     id: string;

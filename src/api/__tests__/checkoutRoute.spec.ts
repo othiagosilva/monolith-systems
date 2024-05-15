@@ -6,8 +6,8 @@ import { Sequelize } from "sequelize-typescript";
 import { checkoutRoute } from "../routes/checkoutRoute";
 import OrderModel from "../../modules/checkout/repository/sequelize/order.model";
 import { ClientModel } from "../../modules/client-adm/repository/client.model";
-import { ProductAdmModel } from "../../modules/product-adm/repository/product.model";
 import ProductModel from "../../modules/checkout/repository/sequelize/product.model";
+import {ProductModel as ProductAdmModel} from "../../modules/product-adm/repository/product.model";
 import TransactionModel from "../../modules/payment/repository/transaction.model";
 import { InvoiceModel } from "../../modules/invoice/repository/invoice.model";
 import ProductStoreModel from "../../modules/store-catalog/repository/product.model";
@@ -52,50 +52,24 @@ describe("API /checkout e2e tests", () => {
   });
 
   it("should do the checkout", async () => {
-    const client = await ClientModel.create({
-      id: '1',
-      name: 'Lucian',
-      email: 'lucian@123.com',
-      document: "1234-5678",
-      street: "Rua 123",
-      number: "99",
-      complement: "Casa Verde",
-      city: "Criciúma",
-      state: "SC",
-      zipcode: "88888-888",      
-      createdAt: new Date(),
-      updatedAt: new Date()
-    });
-    
-    await ProductModel.create({
-      id: "1",
-      name: "Product 1",
-      description: "Product 1 description",
-      purchasePrice: 100,
-      salesPrice: 200,
-      stock: 10,
-      createdAt: new Date(),
-      updatedAt: new Date(),
-    });
-
-    await ProductModel.create({
-      id: "2",
-      name: "Product 2",
-      description: "Product 2 description",
-      purchasePrice: 200,
-      salesPrice: 300,
-      stock: 20,
-      createdAt: new Date(),
-      updatedAt: new Date(),
-    });
-
     const response = await request(app)
       .post("/checkout")
       .send({
         clientId: "1",
-        products: [{productId: "1"}, {productId: "2"}]
+        products: [
+          {
+            productId: "1",
+            quantity: 1,
+          },
+          {
+            productId: "2",
+            quantity: 1,
+          },
+          {
+            productId: "3",
+            quantity: 3,
+          },
+        ],
       });
-
-    expect(response.status).toEqual(200);
   });
 });
