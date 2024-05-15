@@ -1,17 +1,17 @@
 import Id from "../../../@shared/domain/value-object/id.value-object";
+import Address from "../../../@shared/value-object/address";
 import InvoiceItems from "../../domain/entity/invoice-items.entity";
 import Invoice from "../../domain/entity/invoice.entity";
-import Address from "../../value-object/address";
 import FindInvoiceUsecase from "./find-invoice.usecase";
 
-const address = new Address({
-    street: "street 1",
-    number: "number 1",
-    zipCode: "zipCode 1",
-    city: "city 1",
-    complement: "complement 1",
-    state: "state 1"
-});
+const address = new Address(
+    "street 1",
+    "1",
+    "complement 1",
+    "city 1",
+    "state 1",
+    "zipCode 1",
+)
 
 const item1 = new InvoiceItems({
     id: new Id(),
@@ -52,7 +52,7 @@ describe("Find Invoice usecase unit test", () => {
         expect(result.name).toBe("Client 1");
         expect(result.document).toBe("document 1");
         expect(result.street).toBe("street 1");
-        expect(result.number).toBe("number 1");
+        expect(result.number).toBe("1");
         expect(result.zipCode).toBe("zipCode 1");
         expect(result.city).toBe("city 1");
         expect(result.complement).toBe("complement 1");

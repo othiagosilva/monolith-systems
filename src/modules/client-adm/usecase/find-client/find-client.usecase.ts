@@ -1,24 +1,35 @@
-import Id from "../../../@shared/domain/value-object/id.value-object";
-import Client from "../../domain/client.entity";
+
+import Address from "../../../@shared/value-object/address";
 import ClientGateway from "../../gateway/client.gateway";
-import { FindClientInputDto, FindClientOutputDto } from "./find-client.usecase.dto";
-export default class FindClientUsecase{
-    private _clientRepository: ClientGateway;
+import { FindClientUseCaseInputDto, FindClientUseCaseOutputDto } from "./find-client.usecase.dto";
 
-    constructor(clientRepository: ClientGateway) {
-        this._clientRepository = clientRepository;
+export default class FindClientUseCase {
+
+  private _clientRepository: ClientGateway
+
+  constructor(clientRepository: ClientGateway) {
+    this._clientRepository = clientRepository
+  }
+
+  async execute(input: FindClientUseCaseInputDto): Promise<FindClientUseCaseOutputDto> {
+
+    const result = await this._clientRepository.find(input.id)
+
+    return {
+      id: result.id.id,
+      name: result.name,
+      email: result.email,
+      document: result.document,
+      address: new Address(
+        result.address.street,
+        result.address.number,
+        result.address.complement,
+        result.address.city,
+        result.address.state,
+        result.address.zipCode,
+      ),
+      createdAt: result.createdAt,
+      updatedAt: result.updatedAt
     }
-
-    async execute(input: FindClientInputDto): Promise<FindClientOutputDto> {
-        const result = await this._clientRepository.find(input.id);
-
-        return {
-            id: result.id.id,
-            name: result.name,
-            email: result.email,
-            address: result.address,
-            createdAt: result.createdAt,
-            updatedAt: result.updatedAt
-        };
-    }
+  }
 }

@@ -1,8 +1,8 @@
 import Id from "../../@shared/domain/value-object/id.value-object";
+import Address from "../../@shared/value-object/address";
 import InvoiceItems from "../domain/entity/invoice-items.entity";
 import Invoice from "../domain/entity/invoice.entity";
 import InvoiceGateway from "../gateway/invoice.gateway";
-import Address from "../value-object/address";
 import { InvoiceItemsModel } from "./invoice-items.model";
 import { InvoiceModel } from "./invoice.model";
 
@@ -19,14 +19,14 @@ export default class InvoiceRepository implements InvoiceGateway {
             id: new Id(invoiceModel.id),
             name: invoiceModel.name,
             document: invoiceModel.document,
-            address: new Address({
-                street: invoiceModel.street,
-                number: invoiceModel.number,
-                zipCode: invoiceModel.zipCode,
-                city: invoiceModel.city,
-                complement: invoiceModel.complement,
-                state: invoiceModel.state,
-            }),
+            address: new Address(
+                invoiceModel.street,
+                invoiceModel.number,
+                invoiceModel.complement,
+                invoiceModel.city,
+                invoiceModel.state,
+                invoiceModel.zipCode
+            ),
             items: invoiceModel.items.map((item) => {
                 return new InvoiceItems({
                     id: new Id(item.id),
@@ -47,12 +47,12 @@ export default class InvoiceRepository implements InvoiceGateway {
               id: invoice.id.id,
               name: invoice.name,
               document: invoice.document,
-              street: invoice.address.getStreet(),
-              number: invoice.address.getNumber(),
-              city: invoice.address.getCity(),
-              state: invoice.address.getState(),
-              zipCode: invoice.address.getZipCode(),
-              complement: invoice.address.getComplement(),
+              street: invoice.address.street,
+              number: invoice.address.number,
+              city: invoice.address.city,
+              state: invoice.address.state,
+              zipCode: invoice.address.zipCode,
+              complement: invoice.address.complement,
               createdAt: invoice.createdAt,
               updatedAt: invoice.updatedAt,
               items: invoice.items.map((item) => {

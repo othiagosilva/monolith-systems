@@ -1,9 +1,9 @@
 import Id from "../../../@shared/domain/value-object/id.value-object";
 import UseCaseInterface from "../../../@shared/usecase/use-case.interface";
+import Address from "../../../@shared/value-object/address";
 import InvoiceItems from "../../domain/entity/invoice-items.entity";
 import Invoice from "../../domain/entity/invoice.entity";
 import InvoiceGateway from "../../gateway/invoice.gateway";
-import Address from "../../value-object/address";
 import { GenerateInvoiceUseCaseInputDto, GenerateInvoiceUseCaseOutputDto } from "./generate-invoice.usecase.dto";
 
 export default class GenerateInvoiceUsecase implements UseCaseInterface {
@@ -16,14 +16,14 @@ export default class GenerateInvoiceUsecase implements UseCaseInterface {
             id: new Id(input.id) || new Id(),
             name: input.name,
             document: input.document,
-            address: new Address({
-                street: input.street,
-                number: input.number,
-                complement: input.complement,
-                city: input.city,
-                state: input.state,
-                zipCode: input.zipCode
-            }),
+            address: new Address(
+                input.street,
+                input.number,
+                input.complement,
+                input.city,
+                input.state,
+                input.zipCode
+            ),
             items: input.items.map((item) => {
                 return new InvoiceItems({
                     id: new Id(item.id),
@@ -41,12 +41,12 @@ export default class GenerateInvoiceUsecase implements UseCaseInterface {
             id: invoice.id.id,
             name: invoice.name,
             document: invoice.document,
-            street: invoice.address.getStreet(),
-            number: invoice.address.getNumber(),
-            complement: invoice.address.getComplement(),
-            city: invoice.address.getCity(),
-            state: invoice.address.getState(),
-            zipCode: invoice.address.getZipCode(),
+            street: invoice.address.street,
+            number: invoice.address.number,
+            city: invoice.address.city,
+            state: invoice.address.state,
+            zipCode: invoice.address.zipCode,
+            complement: invoice.address.complement,
             items: invoice.items.map(item => ({
                 id: item.id.id,
                 name: item.name,
