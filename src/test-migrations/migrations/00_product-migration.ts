@@ -52,7 +52,31 @@ export const up: MigrationFn<Sequelize> = async ({ context: sequelize }) => {
       type: DataTypes.STRING(255),
       allowNull: false,
     },
-    address: {
+    street: {
+      type: DataTypes.STRING(255),
+      allowNull: true,
+    },
+    number: {
+      type: DataTypes.STRING(255),
+      allowNull: true,
+    },
+    complement: {
+      type: DataTypes.STRING(255),
+      allowNull: true,
+    },
+    city: {
+      type: DataTypes.STRING(255),
+      allowNull: true,
+    },
+    state: {
+      type: DataTypes.STRING(255),
+      allowNull: true,
+    },
+    zipcode: {
+      type: DataTypes.STRING(255),
+      allowNull: true,
+    },
+    document: {
       type: DataTypes.STRING(255),
       allowNull: true,
     },
@@ -119,7 +143,7 @@ export const up: MigrationFn<Sequelize> = async ({ context: sequelize }) => {
     },
     items: {
       type: DataTypes.ARRAY(DataTypes.JSON),
-      allowNull: false,
+      allowNull: true,
     },
     street: {
       type: DataTypes.STRING(255),
@@ -141,7 +165,35 @@ export const up: MigrationFn<Sequelize> = async ({ context: sequelize }) => {
       type: DataTypes.STRING(255),
       allowNull: false,
     },
-    zip: {
+    zipCode: {
+      type: DataTypes.STRING(255),
+      allowNull: false,
+    },
+  });
+
+  await sequelize.getQueryInterface().createTable("invoiceItems", {
+    id: {
+      type: DataTypes.STRING(255),
+      primaryKey: true,
+      allowNull: false,
+    },
+    name: {
+      type: DataTypes.STRING(255),
+      allowNull: false,
+    },
+    price: {
+      type: DataTypes.NUMBER,
+      allowNull: false,
+    },
+    createdAt: {
+      type: DataTypes.DATE,
+      allowNull: false,
+    },
+    updatedAt: {
+      type: DataTypes.DATE,
+      allowNull: false,
+    },
+    invoice_id: {
       type: DataTypes.STRING(255),
       allowNull: false,
     },

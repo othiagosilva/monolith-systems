@@ -33,8 +33,6 @@ export default class GenerateInvoiceUsecase implements UseCaseInterface {
             })
         });
 
-        console.log(invoice)
-
         await this.invoiceRepository.generate(invoice);
 
         return {

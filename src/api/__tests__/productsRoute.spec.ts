@@ -4,7 +4,7 @@ import { migrator } from "../../test-migrations/config/migrator";
 import express, { Express } from "express";
 import { Sequelize } from "sequelize-typescript";
 import { productsRoute } from "../routes/productsRoute";
-import { ProductModel } from "../../modules/product-adm/repository/product.model";
+import { ProductAdmModel } from "../../modules/product-adm/repository/product.model";
 
 describe("API /products e2e tests", () => {
   const app: Express = express();
@@ -22,7 +22,7 @@ describe("API /products e2e tests", () => {
       sync: { force: true },
     });
 
-    sequelize.addModels([ProductModel]);
+    sequelize.addModels([ProductAdmModel]);
     await sequelize.sync()
   });
 
