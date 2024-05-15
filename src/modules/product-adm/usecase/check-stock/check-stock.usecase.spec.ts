@@ -1,5 +1,5 @@
 import { Sequelize } from "sequelize-typescript";
-import { ProductModel } from "../../repository/product.model";
+import { ProductAdmModel } from "../../repository/product.model";
 import CheckStockUseCase from "./check-stock.usecase";
 import ProductRepository from "../../repository/product.repository";
 import Product from "../../domain/product.entity";
@@ -16,7 +16,7 @@ describe ("Check Stock Usecase test", () => {
             sync: { force: true },
         });
 
-        await sequelize.addModels([ProductModel]);
+        await sequelize.addModels([ProductAdmModel]);
         await sequelize.sync();
     });
 
